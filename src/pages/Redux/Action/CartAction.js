@@ -27,4 +27,11 @@ const fetchCartItems = (item) => {
   };
 };
 
-export { addToCartItem, updateQty, removeFromCartItem, fetchCartItems };
+const actions = {
+  addToCartItem,
+  updateQty,
+  removeFromCartItem,
+  fetchCartItems,
+};
+
+export default actions;

@@ -5,26 +5,24 @@ import { useDispatch, useSelector } from "react-redux";
 
 import Navbar from "@/Components/Navbar/Navbar";
 import ToastMessage from "../ToastMessage/ToastMessage";
-import product_details_data from "../Redux/Reducer/index";
-import { ProductDetailsActionHandler } from "../Redux/Action/ProductDetails";
-import { addToCartItem } from "../Redux/Action/CartAction";
+import cartActions from "../Redux/Action/CartAction";
+import productDetailsAction from "../Redux/Action/ProductDetails";
 
 const ProductDetails = () => {
   const [products, setProducts] = useState("");
-  const [cartCount, setCartCount] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isToastMessageOpen, setIsToastMessageOpen] = useState(false);
   const [quantity, setQuantity] = useState(0);
-  const [cart, setCart] = useState([]);
   const dispatch = useDispatch();
   const productDetailsInfo = useSelector(
     (state) => state?.product_details_data?.ProductDetails
   );
 
   const router = useRouter();
-  const cartItems = useSelector((state) => state?.cart_data?.items);
   useEffect(() => {
-    dispatch(ProductDetailsActionHandler(router.query.index));
+    dispatch(
+      productDetailsAction.ProductDetailsActionHandler(router.query.index)
+    );
   }, []);
 
   useEffect(() => {
@@ -34,7 +32,7 @@ const ProductDetails = () => {
   }, [productDetailsInfo]);
 
   const addToCart = (product) => {
-    dispatch(addToCartItem({ ...product, quantity }));
+    dispatch(cartActions.addToCartItem({ ...product, quantity }));
     openMessage();
   };
 

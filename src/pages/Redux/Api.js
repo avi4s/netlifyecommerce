@@ -1,4 +1,5 @@
 import BaseUrl from "@/Config";
+
 const fetchApi = async () => {
   try {
     const response = await fetch(BaseUrl);
@@ -18,4 +19,8 @@ const productDetailsApi = async (url) => {
     throw error;
   }
 };
-export { fetchApi, productDetailsApi };
+const api = {
+  fetchApi,
+  productDetailsApi,
+};
+export default api;

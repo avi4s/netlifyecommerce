@@ -1,4 +1,4 @@
-import { fetchApi } from "../Api";
+import api from "../Api";
 import { PRODUCT_ERROR, PRODUCT_SUCCESS } from "../Types";
 
 const ProductSuccess = (res) => {
@@ -16,7 +16,7 @@ const ProductError = (error) => {
 const ProductActionHandler = () => {
   return async (dispatch) => {
     try {
-      const jsonData = await fetchApi();
+      const jsonData = await api.fetchApi();
       dispatch(ProductSuccess(jsonData));
     } catch (error) {
       dispatch(ProductError(error.message));
@@ -24,4 +24,10 @@ const ProductActionHandler = () => {
   };
 };
 
-export { ProductSuccess, ProductError, ProductActionHandler };
+const productAction = {
+  ProductSuccess,
+  ProductError,
+  ProductActionHandler,
+};
+
+export default productAction;

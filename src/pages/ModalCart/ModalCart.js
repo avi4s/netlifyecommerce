@@ -2,9 +2,9 @@ import Link from "next/link";
 import { useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
-import { removeFromCartItem, updateQty } from "../Redux/Action/CartAction";
 import { FaCheck, FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
+import cartActions from "../Redux/Action/CartAction";
 
 const ModalCart = ({ closeModal, products, quantity }) => {
   const cartItems = useSelector((state) => state?.cart_data?.items);
@@ -13,7 +13,7 @@ const ModalCart = ({ closeModal, products, quantity }) => {
   const [isEdit, setIsEdit] = useState({});
 
   const removeProduct = (productId) => {
-    dispatch(removeFromCartItem(productId));
+    dispatch(cartActions.removeFromCartItem(productId));
   };
 
   const handleEditClick = (productId) => {
@@ -21,7 +21,7 @@ const ModalCart = ({ closeModal, products, quantity }) => {
   };
   const handleCheckClick = (productId) => {
     const quantity = editQuantity[productId] || 0;
-    dispatch(updateQty(productId, quantity));
+    dispatch(cartActions.updateQty(productId, quantity));
     setIsEdit({ ...isEdit, [productId]: false });
   };
 
